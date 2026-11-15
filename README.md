@@ -128,7 +128,7 @@ cd ZKO
 dotnet build Source/ZKO.csproj -p:CelestePrefix="C:\path\to\Celeste"
 ```
 
-- `CelestePrefix` is your Celeste folder (the one containing `Celeste.dll` and `Mods/`). If you clone the repo into `Celeste/Mods/ZKO`, it's found automatically.
+- `CelestePrefix` is your Celeste folder (the one containing `Celeste.dll` and `Mods/`). If you clone the repo into `Celeste/Mods/ZKO`, it's found automatically. To set it once instead of on every build, copy `Source/ZKO.local.props.example` to `Source/ZKO.local.props` and put your path in it. That file is ignored by git.
 - Every build copies the mod into `<CelestePrefix>/Mods/ZKO`. Add `-p:InstallToMods=false` to skip that.
 - `-c Release` also writes `ZKO.zip`, ready to share.
 

@@ -5,3 +5,5 @@ Source/obj/
 *.user
 .vs/
 *.zip
+Source/ZKO.local.props
+zko.bundle

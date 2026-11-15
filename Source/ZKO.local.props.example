@@ -1,0 +1,9 @@
+<!--
+  Copy this file to ZKO.local.props (same folder) and set your Celeste folder.
+  ZKO.local.props is ignored by git, so your local path never ends up in the repo.
+-->
+<Project>
+  <PropertyGroup>
+    <CelestePrefix Condition="'$(CelestePrefix)' == ''">C:\path\to\Celeste</CelestePrefix>
+  </PropertyGroup>
+</Project>

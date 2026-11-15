@@ -6,7 +6,12 @@
     CelestePrefix is your Celeste install folder (the one with Celeste.dll and Mods/).
     Override it with:  dotnet build Source/ZKO.csproj -p:CelestePrefix="D:\Games\Celeste"
     After every build the mod is copied to <CelestePrefix>\Mods\ZKO (skip with -p:InstallToMods=false).
+
+    To set your Celeste folder once, copy ZKO.local.props.example to ZKO.local.props (ignored by git)
+    and put your path in it.
   -->
+  <Import Project="ZKO.local.props" Condition="Exists('ZKO.local.props')" />
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>ZKO</AssemblyName>
