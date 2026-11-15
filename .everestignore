@@ -1,0 +1,4 @@
+# Only matters if this repo itself sits in Celeste/Mods: keep Everest from loading these.
+Source/
+Docs/
+ZKO.zip

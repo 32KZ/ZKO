@@ -1,0 +1,34 @@
+This is the mod ZKO
+Stands for Zeek Keyboard Overlay  
+
+
+
+purpose:
+
+provide an ingame keyboard overlay the user can see.
+
+see docs/design.png for design intent.
+
+
+Buttons to show:
+CDash (Crouch dash)
+dash
+DIRECTIONAL ARROWS
+Jump (spacebar)
+Grab
+ESC (menu)
+
+settings:
+
+should have options in settings sorted to the bottom, such as:
+show
+hide
+position of the overlay (Top left, bottom left, top right, bottom right. default bottom left, padded up 5%.)
+Absolute position
+color
+color pressed
+
+
+
+butttons shown should automatically listen to the keys bound to each ingame action, so it just works.  
+

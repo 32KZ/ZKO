@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Build:    dotnet build Source/ZKO.csproj
+    Release:  dotnet build Source/ZKO.csproj -c Release     (also writes ZKO.zip next to everest.yaml)
+
+    CelestePrefix is your Celeste install folder (the one with Celeste.dll and Mods/).
+    Override it with:  dotnet build Source/ZKO.csproj -p:CelestePrefix="D:\Games\Celeste"
+    After every build the mod is copied to <CelestePrefix>\Mods\ZKO (skip with -p:InstallToMods=false).
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>ZKO</AssemblyName>
+    <RootNamespace>Celeste.Mod.ZKO</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <OutputPath>..\bin\</OutputPath>
+    <!-- Repo cloned straight into Celeste/Mods/ZKO -->
+    <CelestePrefix Condition="'$(CelestePrefix)' == '' And Exists('..\..\..\Celeste.dll')">..\..\..</CelestePrefix>
+    <!-- Default Steam install -->
+    <CelestePrefix Condition="'$(CelestePrefix)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Celeste</CelestePrefix>
+    <InstallToMods Condition="'$(InstallToMods)' == ''">true</InstallToMods>
+  </PropertyGroup>
+
+  <Target Name="CheckCelestePrefix" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(CelestePrefix)\Celeste.dll')"
+           Text="Celeste.dll not found in '$(CelestePrefix)'. Pass your Celeste (with Everest) folder: dotnet build -p:CelestePrefix=&quot;...&quot;" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="$(CelestePrefix)\Celeste.dll" Private="false" />
+    <Reference Include="$(CelestePrefix)\MMHOOK_Celeste.dll" Private="false" />
+    <Reference Include="$(CelestePrefix)\FNA.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Copy the mod (everest.yaml + Dialog + bin/ZKO.dll) into Celeste/Mods/ZKO after each build. -->
+  <Target Name="InstallZKO" AfterTargets="Build" Condition="'$(InstallToMods)' == 'true' And Exists('$(CelestePrefix)\Mods')">
+    <ItemGroup>
+      <ZKODialog Include="..\Dialog\**\*.*" />
+      <ZKOBinaries Include="$(OutputPath)ZKO.dll;$(OutputPath)ZKO.pdb" />
+    </ItemGroup>
+    <Copy SourceFiles="..\everest.yaml" DestinationFolder="$(CelestePrefix)\Mods\ZKO" />
+    <Copy SourceFiles="@(ZKODialog)" DestinationFolder="$(CelestePrefix)\Mods\ZKO\Dialog\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ZKOBinaries)" DestinationFolder="$(CelestePrefix)\Mods\ZKO\bin" />
+    <Message Importance="high" Text="ZKO installed to $(CelestePrefix)\Mods\ZKO" />
+  </Target>
+
+  <!-- Release builds also produce ZKO.zip, ready to drop into Celeste/Mods. -->
+  <Target Name="PackageZKO" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <ZKOStage>$(BaseIntermediateOutputPath)package\</ZKOStage>
+    </PropertyGroup>
+    <ItemGroup>
+      <ZKOPackDialog Include="..\Dialog\**\*.*" />
+    </ItemGroup>
+    <RemoveDir Directories="$(ZKOStage)" />
+    <Copy SourceFiles="..\everest.yaml" DestinationFolder="$(ZKOStage)" />
+    <Copy SourceFiles="@(ZKOPackDialog)" DestinationFolder="$(ZKOStage)Dialog\%(RecursiveDir)" />
+    <Copy SourceFiles="$(OutputPath)ZKO.dll" DestinationFolder="$(ZKOStage)bin" />
+    <ZipDirectory SourceDirectory="$(ZKOStage)" DestinationFile="..\ZKO.zip" Overwrite="true" />
+    <Message Importance="high" Text="Packaged ..\ZKO.zip" />
+  </Target>
+</Project>
