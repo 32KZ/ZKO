@@ -165,3 +165,5 @@ It shows the *first* keyboard key bound to that direction. Reorder or rebind it 
 
 - Concept and design: [@32KZ](https://github.com/32KZ)
 - Built with [Everest](https://github.com/EverestAPI/Everest) for [Celeste](https://www.celestegame.com/)
+
+GNU General Public License (GPL) 3.0 - https://www.gnu.org/licenses/gpl-3.0.en.html#license-text
