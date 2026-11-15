@@ -1,4 +1,4 @@
-# ZKO: Zeek Keyboard Overlay
+# ZKO: Zeek Overlay
 
 **A keyboard overlay for Celeste that lights up the keys you're pressing, using your own bindings.**
 
