@@ -232,6 +232,23 @@ public static class OverlayRenderer {
         End();
     }
 
+    /// <summary>Draws the latest lag probe report (see LagProbe) near the top of the screen.</summary>
+    public static void RenderLagProbe() {
+        string text = LagProbe.CurrentText;
+        Scene scene = Engine.Scene;
+        if (failed || text == null || scene == null || scene is GameLoader || Dialog.Language == null)
+            return;
+
+        GraphicsDevice gd = Engine.Instance.GraphicsDevice;
+        gd.SetRenderTarget(null);
+        gd.Viewport = Engine.Viewport;
+
+        float scale = Engine.ViewWidth / 1920f;
+        Begin(BlendState.AlphaBlend, SamplerState.LinearClamp, Matrix.CreateScale(scale));
+        ActiveFont.DrawOutline(text, new Vector2(960f, 60f), new Vector2(0.5f, 0f), Vector2.One * 0.5f, Color.White, 2f, Color.Black);
+        End();
+    }
+
     private static void KeyRect(KeyDef k, float px, out float x, out float y, out float w, out float h) {
         x = k.Col * (UnitW + Gap) * px;
         y = k.Row * (KeyH + Gap) * px;

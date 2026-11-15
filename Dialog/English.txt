@@ -38,4 +38,7 @@ MODOPTIONS_ZKO_INVERTOUTLINE= Invert Outline
 MODOPTIONS_ZKO_INVERTLABELS= Invert Labels
 MODOPTIONS_ZKO_INVERT_HINT= Inverted parts flip whatever is behind them, so they are always visible.
 
+MODOPTIONS_ZKO_DEBUGLAG= Debug: Show Lag Spikes
+MODOPTIONS_ZKO_DEBUGLAG_HINT= When a frame takes too long, shows where the time went and writes it to log.txt.
+
 MODOPTIONS_ZKO_TOGGLEOVERLAY= Toggle Overlay

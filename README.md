@@ -26,6 +26,7 @@ Drop `ZKO.zip` into `Celeste/Mods` (or build from source, which installs it for 
 | Scale, Opacity | Size and transparency |
 | Key / Outline / Pressed / Label Colour | Preset list plus exact R/G/B sliders (hold left/right to move faster) |
 | Invert Key Colour / Outline / Labels | Draws that part by inverting whatever is behind it, so it is always visible. Pressed keys keep the pressed colour. |
+| Debug: Show Lag Spikes | When a frame takes over 40 ms, shows where the time went (game update, game render, ZKO, garbage collection, other) and writes it to `log.txt` |
 | Toggle Overlay | Optional hotkey, set under Keyboard Config / Controller Config |
 
 Colours are also stored as `RRGGBB` hex in `Celeste/Saves/modsettings-ZKO.celeste`.

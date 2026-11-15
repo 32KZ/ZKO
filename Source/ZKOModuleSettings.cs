@@ -100,6 +100,12 @@ public class ZKOModuleSettings : EverestModuleSettings {
     [SettingName("MODOPTIONS_ZKO_INVERTLABELS")]
     public bool InvertLabels { get; set; } = false;
 
+    // ---- Debug -------------------------------------------------------------------------------
+
+    [SettingName("MODOPTIONS_ZKO_DEBUGLAG")]
+    [SettingSubText("MODOPTIONS_ZKO_DEBUGLAG_HINT")]
+    public bool DebugLagSpikes { get; set; } = false;
+
     // ---- Hotkey -----------------------------------------------------------------------------
 
     [SettingName("MODOPTIONS_ZKO_TOGGLEOVERLAY")]
